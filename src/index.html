@@ -3,11 +3,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Art app</title>
+    <link rel="stylesheet" href="./css/main.scss">
 </head>
 <body>
-    <h1>Berend</h1>
+    
+    <div class="grid">
+        <main class="main">
+            <section class="settings">
+                <h1 class="settings__h1">smartart</h1>
+                <p class="settings__p">Fill in your art preferences below and we will show you
+                recommendations. Then like or dislike art to improve
+                your recommendations.
+                </p>
+                <h6 class="settings__h6">Classification</h6>
+                    <div class="box__item active">history</div>
+                    <div class="box__item">portrait</div>
+                    <div class="box__item">landscape</div>
+                    <div class="box__item">still life</div>
+                    <div class="box__item">genre</div>
+                <h6 class="settings__h6">Period</h6>
+                    <div class="box__item active">modern</div>
+                    <div class="box__item">imperial</div>
+                    <div class="box__item">roman</div>
+                    <div class="box__item">crusdar</div>
+                <div class="box">
+                    <div class="box__item generate">generate</div>
+                </div>
+            </section>
+            <section class="art">
+                <h1>Art</h1>
+            </section>
+            <section class="info">
+                <div class="year">1888</div>
+                <div class="circle__wrapper">
+                    <div class="circle">
+                        <ion-icon class="circle__icon" name="arrow-back"></ion-icon>
+                    </div>
+                </div>
+                <div class="content">
+                    <h2 class="content__h2">Vincent van Gogh</h2>
+                    <h5 class="content__h5">Self-Portrait Dedicated to Paul Gauguin</h5>
+                </div>
+                <div class="circle__wrapper">
+                    <div class="circle">
+                        <ion-icon class="circle__icon" name="arrow-back"></ion-icon>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="./js/bundle.js"></script>
 </body>
 </html>
-

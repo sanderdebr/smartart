@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,500,600,700|Proza+Libre:400,500,600,700&display=swap");
+
+$font1: 'Cormorant Garamond';
+$font2: 'Proza Libre';
+
+$color1: #9e324e;
+$color2: #666;
+
+$ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $font2;
+    color: $color2;
+    font-weight: 100;
+}
+
+.grid {
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+    background: #f5f5f5;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    background: lightcoral;
+    @media all and (max-width: 1200px) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.settings {
+    grid-column: 1 / span 4;
+    grid-row: 1 / span 12;
+    padding: 3em;
+    background: #fefefe;
+    .settings__h1 {
+        font-family: $font1;
+        font-size: 3.5em;
+        padding-bottom: 1rem;
+    }
+    .settings__h6 {
+        font-size: .9em;
+        padding: 2rem 0 1rem 0;
+        font-weight: 600;
+    }
+    .box__item {
+        border: 1px solid #ccc;
+        padding: .8rem;
+        margin: .2rem 0 .2rem 0;
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        z-index: 1;
+        &.active {
+            border: none;
+            background: $color1;
+            color: white;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .1);
+            z-index: -1;
+            transition: transform 175ms ease;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+        &:hover:after  {
+            transform: scaleX(1);
+        }
+    }
+    .box {
+        padding-top: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        .generate {
+            background: $color1;
+            color: white;
+        }
+    }
+}
+
+.info {
+    grid-column: 5 / span 8;
+    grid-row: 9 / span 4;
+    background: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .year {
+        font-family: $font1;
+        color: #ccc;
+        opacity: .5;
+        position: absolute;
+        font-size: 13em;
+        margin-top: -18vh;
+        left: 1vw;
+        @media all and (max-width: 1200px) {
+            margin-top: -32vh;
+        }
+    }
+    .content {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .content__h2 {
+            font-family: $font1;
+            font-size: 3.5em;
+        }
+        .content__h5 {
+            padding-top: .5rem;
+            font-size: 1.1em;
+            color: $color1;
+        }
+        @media all and (max-width: 1200px) {
+            padding: 1em 4em;
+        }
+    }
+    .circle__wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:last-child .circle .circle__icon {
+            transform: rotate(180deg);
+        }
+    }
+    .circle {
+        width: 10vh;
+        height: 10vh;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $color1;
+        cursor: pointer;
+        transition: all 175ms ease;
+        .circle__icon {
+            color: white;
+            font-size: 24px;
+        }
+        &:hover {
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, .3);
+            transform: scale(1.1);
+        }
+    }
+    @media all and (max-width: 1200px) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.art {
+    grid-column: 5 / span 8;
+    grid-row: 1 / span 8;
+    background: lightpink;
+}
