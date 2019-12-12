@@ -21,7 +21,10 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
     width: 100%;
     height: 100%;
     padding: 5%;
-    background: #f5f5f5;
+    background: #f4f4f4;
+    @media all and (max-width: 1200px) {
+        padding: 0%;
+    }
 }
 
 .main {
@@ -52,7 +55,7 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
         padding: 2rem 0 1rem 0;
         font-weight: 600;
     }
-    .box__item {
+    .box__item, .box__generate {
         border: 1px solid #ccc;
         padding: .8rem;
         margin: .2rem 0 .2rem 0;
@@ -87,7 +90,7 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
         width: 100%;
         display: flex;
         justify-content: flex-end;
-        .generate {
+        .box__generate {
             background: $color1;
             color: white;
         }
@@ -170,5 +173,28 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
 .art {
     grid-column: 5 / span 8;
     grid-row: 1 / span 8;
-    background: lightpink;
+    background: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    @media all and (max-width: 1200px) {
+        min-height: 500px;
+    }
+    img {
+        max-height: 30vh;
+        max-width: 20vw;
+        @media all and (max-width: 1200px) {
+            max-height: 300px;
+            max-width: 300px;
+        }
+    }
+    .painting {
+        margin: 0 5em;
+    }
+    .art__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
