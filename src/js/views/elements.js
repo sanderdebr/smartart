@@ -11,4 +11,7 @@ export const elements = {
     generate: document.querySelector('.box__generate'),
     classification: document.querySelector('.classification'),
     century: document.querySelector('.century'),
+    year: document.querySelector('.year'),
+    artist: document.querySelector('.content__h2'),
+    title: document.querySelector('.content__h5')
 };

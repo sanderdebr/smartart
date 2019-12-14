@@ -4,23 +4,9 @@ import { data } from './models/Data';
 import { elements } from './views/elements';
 import * as paintingView from './views/paintingView';
 import * as settingsView from './views/settingsView';
+import { renderDetails } from './views/detailView';
 
 const state = {};
-
-// INIT APPLICATION
-const init = () => {
-
-    // Render data on screen
-    data.classification.forEach((el, i) => {
-        settingsView.renderSettings(data.classification[i], 'classification');
-    })
-
-    data.century.forEach((el, i) => {
-        settingsView.renderSettings(data.century[i], 'century');
-    })
-}
-
-init();
 
 // SAVE NEW SETTINGS
 const controlSettings = async () => {
@@ -39,19 +25,31 @@ const controlSettings = async () => {
 
     // Retrieve paintings
     try {
-        // 4) Search for paintings
+        // Search for paintings
         await state.search.getPaintings();
 
-        // 5) Render results
+        // Render results
         paintingView.renderPaintings(state.search.result);
+
 
     } catch (err) {
         alert(err);
     }
 
+    //Remove loader 
+    paintingView.removeLoader();
+
 }
 
 elements.generate.addEventListener('click', controlSettings);
+
+// GET ART DETAILS
+let newPaintings = document.querySelectorAll('.painting');
+newPaintings.forEach(painting => {
+   painting.addEventListener('click', () => {
+        renderDetails(painting)
+   });
+});
 
 // SLIDE PAINTINGS
 elements.arrowLeft.addEventListener('click', paintingView.slide);
@@ -72,3 +70,25 @@ elements.settings.addEventListener('click', (e) => {
         settingsView.toggle(target);
     }
 })
+
+// INIT APPLICATION
+const init = () => {
+
+    // Render settings on screen
+    data.classification.forEach((el, i) => {
+        settingsView.renderSettings(data.classification[i], 'classification');
+    })
+
+    data.century.forEach((el, i) => {
+        settingsView.renderSettings(data.century[i], 'century');
+    })
+    
+    // Render default artworks
+    settingsView.renderDefault('Prints', '20th century');
+    controlSettings();
+
+    // Render default art details
+
+}
+
+init();

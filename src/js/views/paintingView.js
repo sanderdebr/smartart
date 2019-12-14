@@ -44,22 +44,37 @@ export const renderLoader = () => {
 
 export const renderPaintings = paintings => {
 
-    // Show paintings again
-    elements.paintings.forEach(painting => {
-        painting.style.opacity = 1;
-    })
+    if (paintings) {
+        if (paintings.length > 1) {
 
-    // Replace paintings
+            // Show paintings again
+            elements.paintings.forEach(painting => {
+                painting.style.opacity = 1;
+            })
 
-    paintings.forEach((painting, i) => {
-        const imgPath = paintings[i].primaryimageurl;
-        if(imgPath != '') elements.paintingImg[i].src = imgPath;
-    })
+            // Replace paintings
+            paintings.forEach((painting, i) => {
+                const imgPath = paintings[i].primaryimageurl;
+                const artist = paintings[i].title;
+                const year = paintings[i].accessionyear;
+                const desc = paintings[i].medium;
+                if(imgPath) {
+                    elements.paintingImg[i].src = imgPath;
+                    elements.paintingImg[i].parentNode.setAttribute('data-year', year);
+                    elements.paintingImg[i].parentNode.setAttribute('data-desc', desc);
+                    elements.paintingImg[i].parentNode.setAttribute('data-artist', artist);
+                }
+            })
+        }
+    } else {
+        throw "No images found";
+    }
+}
 
-    // Remove loader
+// Remove loader
+export const removeLoader = () => {
     const loader = document.querySelectorAll(`.lds-dual-ring`);
     if (loader) {
         loader.forEach(loader => loader.parentElement.removeChild(loader));
     }
-
 }

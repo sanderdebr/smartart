@@ -9,7 +9,7 @@ export default class Search {
     randomize(data, limit) {
         let result = [];
         let numbers = [];
-        for (let i = 0; i <= limit; i++) {
+        for (let i = 0; i < limit; i++) {
             const random = Math.floor(Math.random() * data.length);
             if (numbers.indexOf(random) === -1) {
                 numbers.push(random);

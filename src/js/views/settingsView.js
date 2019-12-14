@@ -30,3 +30,12 @@ export const getSettings = () => {
 export const toggle = target => {
     target.classList.toggle("active");
 }
+
+export const renderDefault = (classification, century) => {
+    const buttons = document.querySelectorAll('.box__item');
+    buttons.forEach(button => {
+        if (button.innerHTML == classification || button.innerHTML == century) {
+            button.classList.toggle('active');
+        }
+    })
+}
