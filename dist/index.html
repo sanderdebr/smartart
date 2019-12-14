@@ -3,11 +3,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Art app</title>
 </head>
 <body>
-    <h1>Berend</h1>
-    <script src="./js/bundle.js"></script>
+    
+    <div class="grid">
+        <main class="main">
+            <section class="settings">
+                <h1 class="settings__h1">smartart</h1>
+                <p class="settings__p">Fill in your art preferences below and we will show you
+                recommendations. Then like or dislike art to improve
+                your recommendations.
+                </p>
+                <h6 class="settings__h6 classification">Classification</h6>
+                <h6 class="settings__h6 century">Century</h6>
+                <div class="box">
+                    <div class="box__generate">generate</div>
+                </div>
+            </section>
+            <section class="art">
+                <div class="art__wrapper">
+                    <div class="painting" data-id="1">
+                        <img src="https://images-na.ssl-images-amazon.com/images/I/81HOBLQO%2BgL._SY679_.jpg">
+                    </div>
+                    <div class="painting" data-id="2">
+                        <img src="https://storage.googleapis.com/ehimages/2017/10/25/img_942b5703ed4c5d3b242a34f7cc87d9c0_1508933938684_processed_original.jpg">
+                    </div>
+                    <div class="painting" data-id="3">
+                        <img src="https://cdn.eventfinda.co.nz/uploads/events/transformed/1276619-567973-14.jpg">
+                    </div>
+                    <div class="painting" data-id="4">
+                        <img src="https://images-na.ssl-images-amazon.com/images/I/81HOBLQO%2BgL._SY679_.jpg">
+                    </div>
+                    <div class="painting" data-id="5">
+                        <img src="https://storage.googleapis.com/ehimages/2017/10/25/img_942b5703ed4c5d3b242a34f7cc87d9c0_1508933938684_processed_original.jpg">
+                    </div>
+                </div>
+            </section>
+            <section class="info">
+                <div class="year">1888</div>
+                <div class="circle__wrapper">
+                    <div class="circle circle__left">
+                        <ion-icon class="circle__icon" name="arrow-back"></ion-icon>
+                    </div>
+                </div>
+                <div class="content">
+                    <h2 class="content__h2">Vincent van Gogh</h2>
+                    <h5 class="content__h5">Self-Portrait Dedicated to Paul Gauguin</h5>
+                </div>
+                <div class="circle__wrapper">
+                    <div class="circle circle__right">
+                        <ion-icon class="circle__icon" name="arrow-back"></ion-icon>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+
 <script type="text/javascript" src="js/bundle.js"></script></body>
 </html>
-
