@@ -43,7 +43,7 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
 .settings {
     grid-column: 1 / span 4;
     grid-row: 1 / span 12;
-    padding: 3em;
+    padding: 1.5em 2.5em;
     background: #fefefe;
     .settings__h1 {
         font-family: $font1;
@@ -57,7 +57,7 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
     }
     .box__item, .box__generate {
         border: 1px solid #ccc;
-        padding: .8rem;
+        padding: .7rem;
         margin: .2rem 0 .2rem 0;
         display: inline-block;
         position: relative;
@@ -196,5 +196,56 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
     }
 }
+
+// Warning message
+.warning {
+    animation: show 1s forwards;
+    color: red;
+    padding-top:5px;
+    position: absolute
+}
+@keyframes show {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+// Loader spinner
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    z-index: 1;
+    color: $color1;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid $color1;
+    border-color: $color1 transparent $color1 transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+  

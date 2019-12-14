@@ -1,41 +1,74 @@
 import '../css/main.scss';
+import Search from './models/Search';
+import { data } from './models/Data';
+import { elements } from './views/elements';
+import * as paintingView from './views/paintingView';
+import * as settingsView from './views/settingsView';
 
-// TOGGLE BUTTONS 
+const state = {};
 
-const buttons = document.querySelectorAll('.box__item');
+// INIT APPLICATION
+const init = () => {
 
-const btnClick = (event) => {
-    event.target.classList.toggle("active");
+    // Render data on screen
+    data.classification.forEach((el, i) => {
+        settingsView.renderSettings(data.classification[i], 'classification');
+    })
+
+    data.century.forEach((el, i) => {
+        settingsView.renderSettings(data.century[i], 'century');
+    })
 }
 
-buttons.forEach(button => button.addEventListener('click', btnClick));
+init();
 
-// SLIDE FUNCTIONALITY 
+// SAVE NEW SETTINGS
+const controlSettings = async () => {
 
-const arrowLeft = document.querySelector('.circle__left');
-const arrowRight = document.querySelector('.circle__right');
-const artWrapper = document.querySelector('.art__wrapper');
-const paintings = document.querySelectorAll('.painting');
+    // Remove current paintings
+    paintingView.clear();
 
-const slide = (event) => {
-    let direction, currentMargin, maxWidth;
+    // Render loader icon
+    paintingView.renderLoader();
 
-    maxWidth = (paintings.length) * 300;
+    // Retrieve settings from settingsView
+    const newSettings = settingsView.getSettings();
 
-    const style = artWrapper.currentStyle || window.getComputedStyle(artWrapper);
-    currentMargin = parseInt(style.marginLeft.replace('px', ''));
+    // New Search object and add to state
+    state.search = new Search(newSettings);
 
-    if (event.target.classList.contains("circle__left") || event.target.parentNode.classList.contains("circle__left")) {
-        // LEFT
-        let currentMargin = parseInt(style.marginLeft.replace('px', ''));
-        if (currentMargin < maxWidth) artWrapper.style.marginLeft = currentMargin + 300;
+    // Retrieve paintings
+    try {
+        // 4) Search for paintings
+        await state.search.getPaintings();
 
-    } else {
-        // RIGHT
-        let currentMargin = parseInt(style.marginLeft.replace('px', ''));
-        if (currentMargin > (maxWidth * -1)) artWrapper.style.marginLeft = currentMargin - 300;
+        // 5) Render results
+        paintingView.renderPaintings(state.search.result);
+
+    } catch (err) {
+        alert(err);
     }
+
 }
 
-arrowLeft.addEventListener('click', slide);
-arrowRight.addEventListener('click', slide);
+elements.generate.addEventListener('click', controlSettings);
+
+// SLIDE PAINTINGS
+elements.arrowLeft.addEventListener('click', paintingView.slide);
+elements.arrowRight.addEventListener('click', paintingView.slide);
+
+// TOGGLE BUTTONS - CHECK CHANGES IN SETTINGS
+elements.settings.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('box__generate')) {
+        const activeClassification = document.querySelector('.box__item.active[data-type="classification"]');
+        const activeCentury = document.querySelector('.box__item.active[data-type="century"]');
+        const target = e.target.closest('.box__item');
+        if (target.dataset.type == 'classification' && activeClassification) {
+            settingsView.toggle(activeClassification);
+        }
+        if (target.dataset.type == 'century' && activeCentury) {
+            settingsView.toggle(activeCentury);
+        }
+        settingsView.toggle(target);
+    }
+})
