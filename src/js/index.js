@@ -4,15 +4,16 @@ import { data } from './models/Data';
 import { elements } from './views/elements';
 import * as paintingView from './views/paintingView';
 import * as settingsView from './views/settingsView';
-import { renderDetails } from './views/detailView';
+import * as detailView from './views/detailView';
 
 const state = {};
 
 // SAVE NEW SETTINGS
 const controlSettings = async () => {
 
-    // Remove current paintings
+    // Remove current paintings and detail information
     paintingView.clear();
+    detailView.clear();
 
     // Render loader icon
     paintingView.renderLoader();
@@ -31,25 +32,18 @@ const controlSettings = async () => {
         // Render results
         paintingView.renderPaintings(state.search.result);
 
+        //Remove loader 
+        paintingView.removeLoader();
+
+        return true;
 
     } catch (err) {
-        alert(err);
+        console.log(err);
     }
-
-    //Remove loader 
-    paintingView.removeLoader();
 
 }
 
 elements.generate.addEventListener('click', controlSettings);
-
-// GET ART DETAILS
-let newPaintings = document.querySelectorAll('.painting');
-newPaintings.forEach(painting => {
-   painting.addEventListener('click', () => {
-        renderDetails(painting)
-   });
-});
 
 // SLIDE PAINTINGS
 elements.arrowLeft.addEventListener('click', paintingView.slide);
@@ -84,10 +78,32 @@ const init = () => {
     })
     
     // Render default artworks
+    state.default = true;
     settingsView.renderDefault('Prints', '20th century');
-    controlSettings();
 
-    // Render default art details
+    // Add event listeners for detail view
+    let newPaintings = document.querySelectorAll('.painting');
+    newPaintings.forEach(painting => {
+        painting.addEventListener('click', () => {
+                detailView.renderDetails(painting)
+        });
+    });
+
+    // Render default information
+    async function renderDefault() {
+        try {
+          const response = await controlSettings();
+          if (response) {
+                let defaultPainting = document.querySelector('.painting:nth-child(3)');
+                detailView.renderDetails(newPaintings[2]);
+          }
+        }
+        catch (err) {
+          console.log('renderdefault failed', err);
+        }
+    }
+     
+    renderDefault();  
 
 }
 

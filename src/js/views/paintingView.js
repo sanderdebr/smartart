@@ -1,4 +1,5 @@
 import { elements } from './elements';
+import * as detailView from './detailView';
 
 // SLIDE FUNCTIONALITY 
 
@@ -44,8 +45,7 @@ export const renderLoader = () => {
 
 export const renderPaintings = paintings => {
 
-    if (paintings) {
-        if (paintings.length > 1) {
+    if (paintings.length > 1) {
 
             // Show paintings again
             elements.paintings.forEach(painting => {
@@ -63,10 +63,11 @@ export const renderPaintings = paintings => {
                     elements.paintingImg[i].parentNode.setAttribute('data-year', year);
                     elements.paintingImg[i].parentNode.setAttribute('data-desc', desc);
                     elements.paintingImg[i].parentNode.setAttribute('data-artist', artist);
-                }
+                } 
             })
-        }
     } else {
+        detailView.noResults();
+        removeLoader();
         throw "No images found";
     }
 }
@@ -77,4 +78,13 @@ export const removeLoader = () => {
     if (loader) {
         loader.forEach(loader => loader.parentElement.removeChild(loader));
     }
+}
+
+// Show current painting
+export const showCurrent = currentPainting => {
+    Array.from(elements.paintings).forEach(painting => {
+        painting.classList.remove('painting--active');
+
+    });
+    currentPainting.classList.add('painting--active');
 }

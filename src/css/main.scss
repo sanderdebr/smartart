@@ -193,6 +193,23 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
     }
     .painting {
         margin: 0 5em;
+        transition: all 250ms ease;
+        border:solid 2px;
+        border-bottom-color:#ffe;
+        border-left-color:#eed;
+        border-right-color:#eed;
+        border-top-color:#ccb;
+        transform: scale(.8);
+        img {
+            margin: 10px;
+        }
+    }
+    .painting:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+    .painting--active {
+        transform: scale(1.2);
     }
     .art__wrapper {
         display: flex;
@@ -250,4 +267,42 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
       transform: rotate(360deg);
     }
 }
-  
+
+
+// CSS art frame
+.frame {
+    background-color:#ddc;
+    border:solid 5vmin #eee;
+    border-bottom-color:#fff;
+    border-left-color:#eee;
+    border-radius:2px;
+    border-right-color:#eee;
+    border-top-color:#ddd;
+    box-shadow:0 0 5px 0 rgba(0,0,0,.15) inset, 0 5px 10px 5px rgba(0,0,0,.15);
+    box-sizing:border-box;
+    display:inline-block;
+    max-height: 40vh;
+    max-width: 30vw;
+    position:relative;
+    text-align:center;
+    &:before {
+      border-radius:2px;
+      bottom:-2vmin;
+      box-shadow:0 2px 5px 0 rgba(0,0,0,.15) inset;
+      content:"";
+      left:-2vmin;
+      position:absolute;
+      right:-2vmin;
+      top:-2vmin;
+    }
+    &:after {
+      border-radius:2px;
+      bottom:-2.5vmin;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+      content:"";
+      left:-2.5vmin;
+      position:absolute;
+      right:-2.5vmin;
+      top:-2.5vmin;
+    }
+  }
