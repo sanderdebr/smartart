@@ -2,6 +2,7 @@ import '../css/main.scss';
 import Search from './models/Search';
 import { data } from './models/Data';
 import { elements } from './views/elements';
+import Likes from './models/Likes';
 import * as paintingView from './views/paintingView';
 import * as settingsView from './views/settingsView';
 import * as detailView from './views/detailView';
@@ -64,6 +65,37 @@ elements.settings.addEventListener('click', (e) => {
         settingsView.toggle(target);
     }
 })
+
+// LIKE CONTROLLER
+
+const controlLike = (e) => {
+    let isLiked, objectnumber, division;
+
+    if (!state.likes) state.likes = new Likes();
+
+    objectnumber = e.target.parentNode.parentNode.dataset.objectnumber;
+    division = e.target.parentNode.parentNode.dataset.division;
+
+    // LIKE PAINTING
+    if (e.target.name === 'heart-empty') {
+        isLiked = true;
+        e.target.name = 'heart';
+
+        state.likes.addLike(objectnumber, division);
+    
+    // DISLIKE PAINTING
+    } else {
+        isLiked = false;
+        e.target.name = 'heart-empty';
+
+        state.likes.removeLike(objectnumber);
+    }
+
+    console.log(state.likes);
+
+}
+
+Array.from(elements.likeButtons).forEach(likeBtn => likeBtn.addEventListener('click', controlLike));
 
 // INIT APPLICATION
 const init = () => {

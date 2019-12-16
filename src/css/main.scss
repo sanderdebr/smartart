@@ -206,10 +206,10 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
     }
     .painting:hover {
         cursor: pointer;
-        transform: scale(1.2);
+        transform: scale(1);
     }
     .painting--active {
-        transform: scale(1.2);
+        transform: scale(1);
     }
     .art__wrapper {
         display: flex;
@@ -305,4 +305,21 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
       right:-2.5vmin;
       top:-2.5vmin;
     }
-  }
+}
+
+.like {
+    position: absolute;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    margin-top: 30px;
+    transition: 175ms ease;
+    &:hover {
+        transform: scale(1.5);
+    }
+}
+
+ion-icon {
+    color: $color1;
+    font-size: 33px;
+}

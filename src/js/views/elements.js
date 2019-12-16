@@ -13,5 +13,6 @@ export const elements = {
     century: document.querySelector('.century'),
     year: document.querySelector('.year'),
     artist: document.querySelector('.content__h2'),
-    title: document.querySelector('.content__h5')
+    title: document.querySelector('.content__h5'),
+    likeButtons: document.querySelectorAll('.like')
 };

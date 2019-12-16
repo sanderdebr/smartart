@@ -58,12 +58,16 @@ export const renderPaintings = paintings => {
                 const artist = paintings[i].title;
                 const year = paintings[i].accessionyear;
                 const desc = paintings[i].medium;
+                const division = paintings[i].division;
+                const objectnumber = paintings[i].objectnumber;
                 if(imgPath) {
                     elements.paintingImg[i].src = imgPath;
                     elements.paintingImg[i].parentNode.setAttribute('data-year', year);
                     elements.paintingImg[i].parentNode.setAttribute('data-desc', desc);
                     elements.paintingImg[i].parentNode.setAttribute('data-artist', artist);
-                } 
+                    elements.paintingImg[i].parentNode.setAttribute('data-division', division);
+                    elements.paintingImg[i].parentNode.setAttribute('data-objectnumber', objectnumber);
+                }
             })
     } else {
         detailView.noResults();
