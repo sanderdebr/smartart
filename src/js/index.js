@@ -31,7 +31,7 @@ const controlSettings = async () => {
         await state.search.getPaintings();
 
         // Render results
-        paintingView.renderPaintings(state.search.result);
+        paintingView.renderPaintings(state.search.result, state.likes);
 
         //Remove loader 
         paintingView.removeLoader();
@@ -80,14 +80,12 @@ const controlLike = (e) => {
     if (e.target.name === 'heart-empty') {
         isLiked = true;
         e.target.name = 'heart';
-
         state.likes.addLike(objectnumber, division);
     
     // DISLIKE PAINTING
     } else {
         isLiked = false;
         e.target.name = 'heart-empty';
-
         state.likes.removeLike(objectnumber);
     }
 
@@ -121,6 +119,14 @@ const init = () => {
         });
     });
 
+    // Render default likes
+    state.likes = new Likes();
+
+    // Restore likes
+    state.likes.readStorage();
+
+    console.log('Likes: ', state.likes);
+
     // Render default information
     async function renderDefault() {
         try {
@@ -140,3 +146,8 @@ const init = () => {
 }
 
 init();
+
+// Remove layer when all content has loaded
+window.addEventListener('load', function() {
+    elements.overlay.style.display = "none";
+})

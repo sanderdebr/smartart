@@ -14,5 +14,6 @@ export const elements = {
     year: document.querySelector('.year'),
     artist: document.querySelector('.content__h2'),
     title: document.querySelector('.content__h5'),
-    likeButtons: document.querySelectorAll('.like')
+    likeButtons: document.querySelectorAll('.like'),
+    overlay: document.querySelector('.overlay')
 };

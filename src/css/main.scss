@@ -17,6 +17,17 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
     font-weight: 100;
 }
 
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .grid {
     width: 100%;
     height: 100%;
@@ -322,4 +333,8 @@ $ease: cubic-bezier(0.1, 0.7, 1.0, 0.1);
 ion-icon {
     color: $color1;
     font-size: 33px;
+}
+
+.loading {
+    background: transparent url('/img/spinner.gif') center no-repeat;
 }

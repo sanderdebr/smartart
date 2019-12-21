@@ -37,13 +37,13 @@ export const clear = () => {
 // RENDER LOADER
 
 export const renderLoader = () => {
-    const loader = '<div class="lds-dual-ring"></div>';
+    const loader = '<div class="lds-dual-ring painting"></div>';
     elements.artSection.insertAdjacentHTML('afterbegin', loader);
 }
 
 // RENDER PAINTINGS
 
-export const renderPaintings = paintings => {
+export const renderPaintings = (paintings, likes) => {
 
     if (paintings.length > 1) {
 
@@ -52,6 +52,7 @@ export const renderPaintings = paintings => {
                 painting.style.opacity = 1;
             })
 
+            let x = 0;
             // Replace paintings
             paintings.forEach((painting, i) => {
                 const imgPath = paintings[i].primaryimageurl;
@@ -61,12 +62,26 @@ export const renderPaintings = paintings => {
                 const division = paintings[i].division;
                 const objectnumber = paintings[i].objectnumber;
                 if(imgPath) {
+                    elements.paintings[i].style.display = 'block';
                     elements.paintingImg[i].src = imgPath;
                     elements.paintingImg[i].parentNode.setAttribute('data-year', year);
                     elements.paintingImg[i].parentNode.setAttribute('data-desc', desc);
                     elements.paintingImg[i].parentNode.setAttribute('data-artist', artist);
                     elements.paintingImg[i].parentNode.setAttribute('data-division', division);
                     elements.paintingImg[i].parentNode.setAttribute('data-objectnumber', objectnumber);
+                } else {
+                    x++;
+                    elements.paintings[i].style.display = 'none';
+                    console.log(elements.paintings.length);
+                    if (x == elements.paintings.length) detailView.noResults();
+                }
+                // Check if painting isLiked
+                let obj = likes.likes.find(o => o.object == objectnumber);
+                if (obj) {
+                    elements.likeButtons[i].name = 'heart';
+                    const likeBtnArr = Array.from(elements.likeButtons[i].childNodes);
+                    console.log(likeBtnArr);
+                    likeBtnArr[0].name = 'heart';
                 }
             })
     } else {
@@ -78,7 +93,7 @@ export const renderPaintings = paintings => {
 
 // Remove loader
 export const removeLoader = () => {
-    const loader = document.querySelectorAll(`.lds-dual-ring`);
+    const loader = document.querySelectorAll(`.lds-dual-ring.painting`);
     if (loader) {
         loader.forEach(loader => loader.parentElement.removeChild(loader));
     }
