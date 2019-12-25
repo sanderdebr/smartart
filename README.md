@@ -1,1 +1,1 @@
-Art recommending web app using the Harvard Art API.
+Vanilla JS art recommending web app using the Harvard Art API.
